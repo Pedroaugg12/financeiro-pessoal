@@ -465,15 +465,15 @@ export default function App() {
   const filtrosAtivos = filtro.tipo !== 'todos' || filtro.status !== 'todos' || filtro.cat !== 'todos';
 
   const s = {
-    box: { minHeight: '100vh', background: th.bg, color: th.text, fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" },
-    card: { background: th.card, borderRadius: r.lg, border: '1px solid ' + th.border, padding: cfg.modo_compacto ? '1rem' : '1.25rem' },
-    inp: { width: '100%', background: th.input, border: '1px solid ' + th.border, borderRadius: r.md, padding: '0.875rem', color: th.text, fontSize: '1rem', outline: 'none', boxSizing: 'border-box' },
-    btn1: { background: th.primary, color: '#fff', border: 'none', borderRadius: r.md, padding: '0.75rem 1.25rem', fontWeight: 600, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8 },
-    btn2: { background: th.input, color: th.text, border: '1px solid ' + th.border, borderRadius: r.md, padding: '0.625rem 1rem', fontWeight: 500, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8 },
-    btnR: { background: th.rec + '18', color: th.rec, border: '1px solid ' + th.rec + '40', borderRadius: r.md, padding: '0.875rem 1.5rem', fontWeight: 600, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8 },
-    btnD: { background: th.desp + '18', color: th.desp, border: '1px solid ' + th.desp + '40', borderRadius: r.md, padding: '0.875rem 1.5rem', fontWeight: 600, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8 },
-    ovl: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', zIndex: 50 },
-    mdl: { background: th.card, borderRadius: '24px 24px 0 0', padding: '1.5rem', maxWidth: 500, width: '100%', maxHeight: '90vh', overflowY: 'auto' },
+    box: { minHeight: '100vh', background: th.bg, color: th.text, fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", fontSize: cfg.modo_compacto ? '14px' : '16px' },
+    card: { background: th.card, borderRadius: r.lg, border: '1px solid ' + th.border, padding: cfg.modo_compacto ? '1rem' : '1.5rem' },
+    inp: { width: '100%', background: th.input, border: '1px solid ' + th.border, borderRadius: r.md, padding: cfg.modo_compacto ? '0.75rem' : '1rem', color: th.text, fontSize: cfg.modo_compacto ? '0.95rem' : '1.1rem', outline: 'none', boxSizing: 'border-box' },
+    btn1: { background: th.primary, color: '#fff', border: 'none', borderRadius: r.md, padding: cfg.modo_compacto ? '0.625rem 1rem' : '0.875rem 1.5rem', fontWeight: 600, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: cfg.modo_compacto ? '0.9rem' : '1rem' },
+    btn2: { background: th.input, color: th.text, border: '1px solid ' + th.border, borderRadius: r.md, padding: cfg.modo_compacto ? '0.5rem 0.875rem' : '0.75rem 1.25rem', fontWeight: 500, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: cfg.modo_compacto ? '0.85rem' : '1rem' },
+    btnR: { background: th.rec + '18', color: th.rec, border: '1px solid ' + th.rec + '40', borderRadius: r.md, padding: cfg.modo_compacto ? '0.75rem 1.25rem' : '1rem 2rem', fontWeight: 600, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: cfg.modo_compacto ? '0.9rem' : '1.1rem' },
+    btnD: { background: th.desp + '18', color: th.desp, border: '1px solid ' + th.desp + '40', borderRadius: r.md, padding: cfg.modo_compacto ? '0.75rem 1.25rem' : '1rem 2rem', fontWeight: 600, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: cfg.modo_compacto ? '0.9rem' : '1.1rem' },
+    ovl: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, padding: '1rem' },
+    mdl: { background: th.card, borderRadius: '24px', padding: cfg.modo_compacto ? '1.25rem' : '2rem', maxWidth: 500, width: '100%', maxHeight: '90vh', overflowY: 'auto' },
   };
 
   const css = `@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}button:active{transform:scale(.97)}input:focus,select:focus{border-color:${th.primary}!important}`;
@@ -683,8 +683,7 @@ export default function App() {
       {modal === 'trans' && (
         <div style={s.ovl} onClick={() => setModal(null)}>
           <div style={s.mdl} onClick={e => e.stopPropagation()}>
-            <div style={{ width: 40, height: 4, background: th.border, borderRadius: 2, margin: '0 auto 1rem' }} />
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}><h3 style={{ fontSize: '1.05rem', fontWeight: 600, margin: 0 }}>{edit ? 'Editar' : 'Nova'}</h3><button onClick={() => setModal(null)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: th.muted }}><I.X /></button></div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem' }}><h3 style={{ fontSize: '1.25rem', fontWeight: 600, margin: 0 }}>{edit ? 'Editar' : 'Nova'} transação</h3><button onClick={() => setModal(null)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: th.muted, padding: 4 }}><I.X /></button></div>
             <div style={{ display: 'flex', gap: 8, marginBottom: '1rem' }}>{['receita', 'despesa'].map(tipo => (<button key={tipo} onClick={() => setForm({ ...form, tipo, cat: '' })} style={{ flex: 1, padding: 12, borderRadius: r.md, border: '2px solid ' + (form.tipo === tipo ? (tipo === 'receita' ? th.rec : th.desp) : th.border), background: form.tipo === tipo ? (tipo === 'receita' ? th.rec : th.desp) + '15' : 'transparent', color: form.tipo === tipo ? (tipo === 'receita' ? th.rec : th.desp) : th.muted, fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>{tipo === 'receita' ? <I.Up /> : <I.Down />}{tipo === 'receita' ? 'Receita' : 'Despesa'}</button>))}</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div><label style={{ fontSize: 12, color: th.muted }}>Descrição *</label><input type="text" value={form.desc} onChange={e => setForm({ ...form, desc: e.target.value })} style={s.inp} autoFocus /></div>
@@ -704,8 +703,7 @@ export default function App() {
       {modal === 'cat' && (
         <div style={s.ovl} onClick={() => setModal(null)}>
           <div style={s.mdl} onClick={e => e.stopPropagation()}>
-            <div style={{ width: 40, height: 4, background: th.border, borderRadius: 2, margin: '0 auto 1rem' }} />
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}><h3 style={{ fontSize: '1.05rem', fontWeight: 600, margin: 0 }}>{edit ? 'Editar' : 'Nova'} categoria</h3><button onClick={() => setModal(null)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: th.muted }}><I.X /></button></div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem' }}><h3 style={{ fontSize: '1.25rem', fontWeight: 600, margin: 0 }}>{edit ? 'Editar' : 'Nova'} categoria</h3><button onClick={() => setModal(null)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: th.muted, padding: 4 }}><I.X /></button></div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div><label style={{ fontSize: 12, color: th.muted }}>Nome *</label><input type="text" value={formCat.nome} onChange={e => setFormCat({ ...formCat, nome: e.target.value })} style={s.inp} autoFocus /></div>
               <div><label style={{ fontSize: 12, color: th.muted }}>Tipo</label><select value={formCat.tipo} onChange={e => setFormCat({ ...formCat, tipo: e.target.value })} style={s.inp}><option value="despesa">Despesa</option><option value="receita">Receita</option><option value="ambos">Ambos</option></select></div>
