@@ -2,15 +2,26 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="theme-color" content="#0a0a0c" />
-    <meta name="description" content="Sistema de Finanças Pessoais" />
-    <title>Finanças Pessoais</title>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    </style>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%232557d6'/><g fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round'><path d='M9 22V14'/><path d='M16 22V9'/><path d='M23 22V17'/></g></svg>"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Sistema de controle financeiro" />
+    <title>Financeiro</title>
+    <script>
+      // Aplica o tema antes da primeira pintura para não piscar branco ao carregar.
+      try {
+        var t = localStorage.getItem('fin.tema')
+        if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark')
+        }
+        if (localStorage.getItem('fin.densidade') === 'compacta') {
+          document.documentElement.classList.add('density-compact')
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,0 +1,270 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ==========================================================================
+   TOKENS
+   Paleta neutra e fria. Cor só onde ela significa alguma coisa:
+   verde = entrou, vermelho = saiu, âmbar = vence logo, azul = ação.
+   Nada de gradiente, nada de cor decorativa.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  --app-bg: #f5f6f8;
+  --app-surface: #ffffff;
+  --app-surface-2: #eff1f4;
+  --app-surface-3: #e6e9ee;
+  --app-line: #dfe3e8;
+  --app-line-strong: #c5ccd6;
+
+  --app-fg: #171a1f;
+  --app-fg-muted: #59606b;
+  --app-fg-subtle: #878e99;
+
+  --app-accent: #2557d6;
+  --app-accent-hover: #1e46ae;
+  --app-accent-fg: #ffffff;
+  --app-accent-soft: #e8eefc;
+
+  --app-pos: #077d55;
+  --app-pos-soft: #e2f4ec;
+  --app-neg: #c02626;
+  --app-neg-soft: #fce9e9;
+  --app-warn: #92610a;
+  --app-warn-soft: #fbf0d9;
+
+  --app-shadow: 0 1px 2px rgb(16 24 40 / 0.05);
+  --app-shadow-pop: 0 8px 24px -6px rgb(16 24 40 / 0.16), 0 2px 6px -2px rgb(16 24 40 / 0.08);
+
+  /* densidade */
+  --row-h: 40px;
+  --cell-py: 0.5rem;
+  --pane-p: 1rem;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --app-bg: #0e1013;
+  --app-surface: #16191e;
+  --app-surface-2: #1d2128;
+  --app-surface-3: #252a32;
+  --app-line: #272c34;
+  --app-line-strong: #3a414c;
+
+  --app-fg: #e8eaed;
+  --app-fg-muted: #99a1ac;
+  --app-fg-subtle: #6d7580;
+
+  --app-accent: #4b82f0;
+  --app-accent-hover: #6a99f4;
+  --app-accent-fg: #ffffff;
+  --app-accent-soft: #16233d;
+
+  --app-pos: #35c48b;
+  --app-pos-soft: #10251d;
+  --app-neg: #ef6a6a;
+  --app-neg-soft: #2a1518;
+  --app-warn: #d9a441;
+  --app-warn-soft: #262013;
+
+  --app-shadow: 0 1px 2px rgb(0 0 0 / 0.4);
+  --app-shadow-pop: 0 12px 32px -8px rgb(0 0 0 / 0.7), 0 2px 8px -2px rgb(0 0 0 / 0.5);
+}
+
+.density-compact {
+  --row-h: 32px;
+  --cell-py: 0.3125rem;
+  --pane-p: 0.75rem;
+}
+
+@theme inline {
+  --color-bg: var(--app-bg);
+  --color-surface: var(--app-surface);
+  --color-surface-2: var(--app-surface-2);
+  --color-surface-3: var(--app-surface-3);
+  --color-line: var(--app-line);
+  --color-line-strong: var(--app-line-strong);
+
+  --color-fg: var(--app-fg);
+  --color-fg-muted: var(--app-fg-muted);
+  --color-fg-subtle: var(--app-fg-subtle);
+
+  --color-accent: var(--app-accent);
+  --color-accent-hover: var(--app-accent-hover);
+  --color-accent-fg: var(--app-accent-fg);
+  --color-accent-soft: var(--app-accent-soft);
+
+  --color-pos: var(--app-pos);
+  --color-pos-soft: var(--app-pos-soft);
+  --color-neg: var(--app-neg);
+  --color-neg-soft: var(--app-neg-soft);
+  --color-warn: var(--app-warn);
+  --color-warn-soft: var(--app-warn-soft);
+
+  /* Raio pequeno. Card de 16px arredondado grita "app de celular". */
+  --radius-base: 5px;
+  --radius-pane: 7px;
+
+  --shadow-pane: var(--app-shadow);
+  --shadow-pop: var(--app-shadow-pop);
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Segoe UI Mono', Menlo, Consolas, monospace;
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+@layer base {
+  * {
+    border-color: var(--app-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--app-bg);
+    color: var(--app-fg);
+    font-family: var(--font-sans);
+    /* 13px é a densidade de sistema. 16px é densidade de landing page. */
+    font-size: 13px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Dinheiro precisa alinhar coluna com coluna. Sem isso, "1.111,11" e
+     "9.999,99" têm larguras diferentes e a coluna fica torta. */
+  table,
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--app-accent);
+    outline-offset: 1px;
+    border-radius: 3px;
+  }
+
+  ::placeholder {
+    color: var(--app-fg-subtle);
+  }
+
+  /* Tira as setinhas do input number — em campo de valor elas só atrapalham. */
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  .dark input[type='date'i]::-webkit-calendar-picker-indicator {
+    filter: invert(0.75);
+  }
+
+  /* Scrollbar discreta, no tom da interface */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--app-line-strong) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--app-line-strong);
+    border-radius: 6px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--app-fg-subtle);
+    background-clip: content-box;
+  }
+}
+
+/* ==========================================================================
+   UTILITÁRIOS
+   ========================================================================== */
+
+@utility pane {
+  background-color: var(--app-surface);
+  border: 1px solid var(--app-line);
+  border-radius: var(--radius-pane);
+}
+
+/* Cabeçalho de tabela grudado no topo ao rolar a lista */
+@utility th-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--app-surface-2);
+}
+
+@keyframes fin-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fin-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fin-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fin-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.anim-slide-in {
+  animation: fin-slide-in 0.16s ease-out;
+}
+.anim-pop-in {
+  animation: fin-pop-in 0.14s ease-out;
+}
+.anim-spin {
+  animation: fin-spin 0.7s linear infinite;
+}
+.anim-pulse {
+  animation: fin-pulse 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-slide-in,
+  .anim-pop-in,
+  .anim-pulse {
+    animation: none;
+  }
+}
