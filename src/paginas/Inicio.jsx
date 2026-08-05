@@ -19,7 +19,6 @@ export function Inicio({ mes, aoAbrirNovo, aoEditar, aoVerLancamentos }) {
     erro,
     recarregar,
     saldoRealizado,
-    saldoPrevisto,
   } = useFinance()
 
   const doMes = useMemo(
@@ -142,18 +141,12 @@ export function Inicio({ mes, aoAbrirNovo, aoEditar, aoVerLancamentos }) {
   return (
     <div className="flex flex-col gap-3">
       {/* indicadores */}
-      <div className="grid grid-cols-2 gap-2 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
         <Indicador
           rotulo="Saldo atual"
           valor={moeda(saldoRealizado)}
           detalhe="Somente lançamentos confirmados"
           cor={saldoRealizado < 0 ? 'negativo' : 'neutro'}
-        />
-        <Indicador
-          rotulo="Saldo previsto"
-          valor={moeda(saldoPrevisto)}
-          detalhe="Incluindo tudo que está pendente"
-          cor={saldoPrevisto < 0 ? 'negativo' : 'neutro'}
         />
         <Indicador
           rotulo="Receitas do mês"
@@ -186,7 +179,6 @@ export function Inicio({ mes, aoAbrirNovo, aoEditar, aoVerLancamentos }) {
               : 'Sem receita registrada'
           }
           cor={resumo.resultado >= 0 ? 'positivo' : 'negativo'}
-          className="col-span-2 lg:col-span-1"
         />
       </div>
 
